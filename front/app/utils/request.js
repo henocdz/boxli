@@ -37,6 +37,17 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
+  let headers = 'headers' in options ? options['headers'] : {}
+  headers = {
+    'Content-Type': 'application/json',
+    ...headers
+  }
+  options['headers'] = headers
+
+  if('body' in options){
+    options['body'] = JSON.stringify(options['body'])
+  }
+
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);
