@@ -1,0 +1,11 @@
+# Don't check auto-generated stuff into git
+coverage
+# build | I know but fuck Microsoft Azure
+node_modules
+stats.json
+
+# Cruft
+.DS_Store
+npm-debug.log
+.idea
+.eslintrc

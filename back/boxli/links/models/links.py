@@ -7,6 +7,9 @@ class Link(BaseModel):
     key = models.CharField(max_length=50, unique=True)
     url = models.URLField()
 
+    class Meta:
+        ordering = ['created']
+
     def save(self, *args, **kwargs):
         if not self.key:
             # TODO: improve unique key
