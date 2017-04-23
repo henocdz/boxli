@@ -1,4 +1,7 @@
-from django.db import models
+import os
+import binascii
+
+from django.db import models, IntegrityError
 from base.models import BaseModel
 
 
@@ -10,10 +13,20 @@ class Link(BaseModel):
     class Meta:
         ordering = ['created']
 
+    def generate_key(self):
+        return binascii.hexlify(os.urandom(3)).decode()
+
     def save(self, *args, **kwargs):
         if not self.key:
-            # TODO: improve unique key
             self.key = self.title
+            while True:
+                try:
+                    self.key = self.generate_key()
+                    super().save(*args, **kwargs)
+                    break
+                except IntegrityError:
+                    pass
+            return
         super().save(*args, **kwargs)
 
     def __str__(self):

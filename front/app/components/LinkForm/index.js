@@ -20,9 +20,12 @@ export default class LinkForm extends BaseComponent {
     const url = ENV.API_URL + ENV.CREATE_LINK_URL
     request(url, {
       method: 'POST',
-      body: {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         url: this.state.link
-      }
+      })
     })
     .then((response) => {
       console.log(response)
