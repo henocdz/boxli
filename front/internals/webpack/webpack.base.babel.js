@@ -58,6 +58,9 @@ module.exports = (options) => ({
       query: {
         limit: 10000,
       },
+    }, {
+      test: /\.less$/,
+      loaders: ['style-loader', 'css-loader', 'less-loader'],
     }],
   },
   plugins: options.plugins.concat([
