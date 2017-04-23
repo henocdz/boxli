@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from links.views import RedirectLinkView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/auth/', include('rest_framework.urls')),
     url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^(?P<key>[a-zA-Z0-9\-\_]{1,})/$', RedirectLinkView.as_view(), name='redirect'),
 ]

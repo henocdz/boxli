@@ -7,5 +7,11 @@ class Link(BaseModel):
     key = models.CharField(max_length=50, unique=True)
     url = models.URLField()
 
+    def save(self, *args, **kwargs):
+        if not self.key:
+            # TODO: improve unique key
+            self.key = self.title
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
