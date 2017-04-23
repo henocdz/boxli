@@ -17,12 +17,18 @@ export default class LinkForm extends BaseComponent {
 
   _onSubmit(e){
     e.preventDefault()
-
     const url = ENV.API_URL + ENV.CREATE_LINK_URL
-    const resposne = request(url, {
+    request(url, {
       method: 'POST',
-      body: {}
+      body: {
+        url: this.state.link
+      }
     })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((e) => e.response.json().then(console.log))
+
   }
 
   _onChange(e){
@@ -35,9 +41,7 @@ export default class LinkForm extends BaseComponent {
     return (
       <form onSubmit={this._onSubmit} className="link-form">
         <input value={this.state.link} onChange={this._onChange} className="input" placeholder="Ingresa una URL" />
-        <button>
-        Crear
-        </button>
+        <button>Crear</button>
       </form>
     )
   }

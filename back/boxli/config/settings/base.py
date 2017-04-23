@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'links',
     'users',
 
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -132,3 +134,8 @@ SITE_URL = 'http://{}/'.format(os.getenv('BOXLI_SITE_URL'))
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_PREFLIGHT_MAX_AGE = 0
