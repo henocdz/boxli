@@ -26,7 +26,7 @@ class Link(BaseModel):
 
     def retrieve_website_title(self):
         try:
-            soup = BeautifulSoup(request.urlopen(self.url))
+            soup = BeautifulSoup(request.urlopen(self.url), "html.parser")
         except:
             return ''
         else:
