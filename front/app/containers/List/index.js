@@ -32,6 +32,7 @@ export default class List extends BaseContainer{
       <li key={idx}>
         <strong>{link.title}: </strong>
         <a href={link.short_url} target="_blank">{link.short_url}</a> => <a href={link.url} target="_blank">{link.url}</a>
+        &nbsp;[{link.visits}]
       </li>
     )
   }

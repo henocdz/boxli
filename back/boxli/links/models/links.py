@@ -12,6 +12,7 @@ class Link(BaseModel):
     title = models.CharField(max_length=100, default='')
     key = models.CharField(max_length=50, unique=True)
     url = models.URLField()
+    visits = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['created']

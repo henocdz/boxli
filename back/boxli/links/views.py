@@ -9,6 +9,8 @@ class RedirectLinkView(View):
         key = key.lower()
         try:
             link = Link.objects.get(key=key)
+            link.visits += 1
+            link.save()
         except Link.DoesNotExist:
             raise Http404()
         else:
