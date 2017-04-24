@@ -2,7 +2,7 @@ from config.settings.base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['boxli-api.herokuapp.com']
+ALLOWED_HOSTS = ['boxli-api.herokuapp.com', 'api.boxli.co', 'boxli.co']
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
