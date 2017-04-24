@@ -103,7 +103,7 @@
       }
     },
     "rules": {
-      "no-console":1,
+      "no-console": 0,
       "indent": [
         1,
         2
@@ -128,7 +128,9 @@
         "never"
       ],
       "no-underscore-dangle": "off",
-      "no-unexpected-multiline": [ 2 ],
+      "no-unexpected-multiline": [
+        2
+      ],
       "react/jsx-filename-extension": 0,
       "react/jsx-no-target-blank": 0,
       "react/require-extension": 0,
@@ -140,7 +142,6 @@
       "max-len": 0,
       "newline-per-chained-call": 0,
       "no-confusing-arrow": 0,
-      "no-console": 0,
       "no-use-before-define": 0,
       "prefer-template": 2,
       "class-methods-use-this": 0,
@@ -225,6 +226,7 @@
     "sanitize.css": "4.1.0",
     "style-loader": "^0.13.1",
     "styled-components": "1.1.2",
+    "validatorjs": "^3.12.0",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.1"
   },

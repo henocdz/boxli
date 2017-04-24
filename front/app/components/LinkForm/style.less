@@ -6,30 +6,42 @@
     width: 40%;
     margin: 0 auto;
 
-    .input, button{
-        display: inline-block;
-        vertical-align: middle;
-    }
+    .input-wrapper{
+        display: block;
+        width: 100%;
 
-    .input{
-        background-color: #fff;
-        outline: 0;
-        padding: @padding @padding/2;
-        width: 80%;
-        border-radius: @radius 0 0 @radius;
-    }
+        .input, button{
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-    button{
-        @color: rgb(0, 49, 82);
-        background-color: @color;
-        padding: @padding;
-        outline: 0;
-        color: #fff;
-        width: 20%;
-        border-radius: 0 @radius @radius 0;
+        .input{
+            background-color: #fff;
+            outline: 0;
+            padding: @padding @padding/2;
+            width: 80%;
+            border-radius: @radius 0 0 @radius;
+        }
 
-        &:active{
-            background-color: darken(@color, 3%)
+        button{
+            @color: rgb(0, 49, 82);
+            background-color: @color;
+            padding: @padding;
+            outline: 0;
+            color: #fff;
+            width: 20%;
+            border-radius: 0 @radius @radius 0;
+
+            &:active{
+                background-color: darken(@color, 3%)
+            }
         }
     }
+
+    p{
+        margin: 0;
+        padding: 0;
+        color: rgb(255, 98, 85);
+    }
+
 }
