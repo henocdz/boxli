@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-
+import { retrieveToken, isAuthenticated } from './auth'
 /**
  * Parses the JSON returned by a network request
  *
@@ -42,6 +42,10 @@ export default function request(url, options = {}) {
   headers = {
     'Content-Type': 'application/json',
     ...headers
+  }
+
+  if(isAuthenticated()){
+    headers.Authorization = 'Token ' + retrieveToken()
   }
   data.headers = headers
 

@@ -11,7 +11,12 @@ from links.models import Link
 class ListCreateLinksView(generics.ListCreateAPIView):
     authentication_classes = (UserTokenAuthentication,)
     serializer_class = LinkSerializer
-    queryset = Link.objects.all()
+
+    def get_queryset(self):
+        qs = Link.objects.all()
+        if self.request.auth == 'User':
+            qs = qs.filter(owner=self.request.user)
+        return qs
 
     def get_owner(self):
         if self.request.auth == 'User':

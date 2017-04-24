@@ -13,7 +13,7 @@ export default class List extends BaseContainer{
   constructor(props) {
     super(props)
     this.state = { links: [] }
-    this._bind('_fetchLinks', '_renderLink')
+    this._bind('_fetchLinks', '_renderLink', '_renderLinks')
   }
 
   componentDidMount() {
@@ -37,12 +37,20 @@ export default class List extends BaseContainer{
     )
   }
 
+  _renderLinks(){
+    if (this.state.links.length > 0) {
+      return this.state.links.map(this._renderLink)
+    } else {
+      return (<p>You dont have any links yet!</p>)
+    }
+  }
+
   render() {
     return (
       <section>
         <Logo />
         <ul>
-          {this.state.links.map(this._renderLink)}
+          {this._renderLinks()}
         </ul>
       </section>
     )

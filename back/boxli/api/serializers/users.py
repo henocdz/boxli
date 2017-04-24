@@ -18,7 +18,7 @@ class UserAuthTokenSerializer(serializers.Serializer):
             user = self.authenticate(email=email, password=password)
 
             if user is None:
-                msg = 'Unable to log in with provided credentials.'
+                msg = 'Combination of password and email is invalid'
                 raise serializers.ValidationError(msg)
         else:
             msg = 'Must include "email" and "password".'
