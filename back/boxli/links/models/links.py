@@ -22,7 +22,7 @@ class Link(BaseModel):
         # make sure that there is at least one non-digit in the key
         while not re.search('\D', key, re.IGNORECASE):
             key = binascii.hexlify(os.urandom(3)).decode()
-        return key
+        return key.lower()
 
     def retrieve_website_title(self):
         try:

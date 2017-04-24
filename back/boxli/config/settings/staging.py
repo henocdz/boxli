@@ -1,6 +1,6 @@
 from config.settings.base import *
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['boxli-api.herokuapp.com']
 
@@ -8,3 +8,5 @@ ALLOWED_HOSTS = ['boxli-api.herokuapp.com']
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+SITE_URL = 'http://{}/'.format(os.getenv('BOXLI_SITE_URL'))
