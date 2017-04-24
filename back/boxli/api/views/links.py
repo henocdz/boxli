@@ -37,7 +37,6 @@ class RetrieveUpdateLinkView(generics.RetrieveUpdateAPIView):
         key = serializer.validated_data['key']
         link = self.get_object()
         if link.key == key:
-            serializer.save()
             return
         if Link.objects.filter(key=key).exists():
             raise ParseError({'key': 'That key already exist'})

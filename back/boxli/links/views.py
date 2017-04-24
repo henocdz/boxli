@@ -1,15 +1,17 @@
 from django.shortcuts import redirect
 from django.views.generic import View
 from django.http import Http404
+from django.db.models import F
+
 from links.models import Link
 
 # Create your views here.
 class RedirectLinkView(View):
     def get(self, request, key, *args, **kwargs):
         try:
-            link = Link.objects.get(key=key)
-            link.visits += 1
-            link.save()
+            links = Link.objects.filter(key=key)
+            link = links[0]
+            links.update(visits=F('visits') + 1)
         except Link.DoesNotExist:
             raise Http404()
         else:
