@@ -10,9 +10,10 @@ from bs4 import BeautifulSoup
 
 class Link(BaseModel):
     title = models.CharField(max_length=100, default='')
-    key = models.CharField(max_length=50, unique=True)
-    url = models.URLField()
+    key = models.CharField(max_length=50, unique=True, db_index=True)
+    url = models.URLField(db_index=True)
     visits = models.PositiveIntegerField(default=0)
+    owner = models.ForeignKey('users.User', null=True, default=None)
 
     class Meta:
         ordering = ['created']

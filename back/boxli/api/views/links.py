@@ -4,12 +4,23 @@ from django.db import IntegrityError
 
 from api.serializers.links import LinkSerializer, LinkUpdateSerializer
 from api.helpers.views import CustomSerializers
+from users.backends import UserTokenAuthentication
 from links.models import Link
 
 
 class ListCreateLinksView(generics.ListCreateAPIView):
+    authentication_classes = (UserTokenAuthentication,)
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
+
+    def get_owner(self):
+        if self.request.auth == 'User':
+            return self.request.user
+        return None
+
+    def perform_create(self, serializer):
+        owner = self.get_owner()
+        serializer.save(owner=owner)
 
     def create(self, *args, **kwargs):
         try:
