@@ -1,8 +1,11 @@
 import os
+import re
 import binascii
+from urllib import request
 
 from django.db import models, IntegrityError
 from base.models import BaseModel
+from bs4 import BeautifulSoup
 
 
 class Link(BaseModel):
@@ -14,11 +17,25 @@ class Link(BaseModel):
         ordering = ['created']
 
     def generate_key(self):
-        return binascii.hexlify(os.urandom(3)).decode()
+        regex = re.compile('')
+        key = binascii.hexlify(os.urandom(3)).decode()
+        # make sure that there is at least one non-digit in the key
+        while not re.search('\D', key, re.IGNORECASE):
+            key = binascii.hexlify(os.urandom(3)).decode()
+        return key
+
+    def retrieve_website_title(self):
+        try:
+            soup = BeautifulSoup(request.urlopen(self.url))
+        except:
+            return ''
+        else:
+            return soup.title.string
 
     def save(self, *args, **kwargs):
         if not self.key:
             self.key = self.title
+            self.title = self.retrieve_website_title()
             while True:
                 try:
                     self.key = self.generate_key()

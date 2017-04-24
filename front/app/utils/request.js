@@ -36,19 +36,20 @@ function checkStatus(response) {
  *
  * @return {object}           The response data
  */
-export default function request(url, options) {
-  let headers = 'headers' in options ? options['headers'] : {}
+export default function request(url, options = {}) {
+  const data = { ...options }
+  let headers = 'headers' in options ? options.headers : {}
   headers = {
     'Content-Type': 'application/json',
     ...headers
   }
-  options['headers'] = headers
+  data.headers = headers
 
-  if('body' in options){
-    options['body'] = JSON.stringify(options['body'])
+  if (data.body) {
+    data.body = JSON.stringify(data.body)
   }
 
-  return fetch(url, options)
+  return fetch(url, data)
     .then(checkStatus)
-    .then(parseJSON);
+    .then(parseJSON)
 }

@@ -12,24 +12,25 @@ export default class List extends BaseContainer{
 
   constructor(props) {
     super(props)
-    this.state = {links: []}
+    this.state = { links: [] }
     this._bind('_fetchLinks', '_renderLink')
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this._fetchLinks()
   }
 
-  async _fetchLinks(){
+  async _fetchLinks() {
     const url = ENV.API_URL + ENV.CREATE_LINK_URL
     const response = await request(url)
 
-    this.setState({links: response})
+    this.setState({ links: response })
   }
 
-  _renderLink(link, idx){
+  _renderLink(link, idx) {
     return (
       <li key={idx}>
+        <strong>{link.title}: </strong>
         <a href={link.short_url} target="_blank">{link.short_url}</a> => <a href={link.url} target="_blank">{link.url}</a>
       </li>
     )
