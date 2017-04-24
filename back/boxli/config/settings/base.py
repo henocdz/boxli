@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'links',
     'users',
+    'helpers',
 
     'corsheaders',
     'rest_framework',

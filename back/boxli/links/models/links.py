@@ -1,11 +1,13 @@
 import os
 import re
 import binascii
+from time import time
 from urllib import request
 
 from django.db import models, IntegrityError
 from base.models import BaseModel
 from bs4 import BeautifulSoup
+from helpers.math import base_convert
 
 
 class Link(BaseModel):
@@ -19,12 +21,9 @@ class Link(BaseModel):
         ordering = ['created']
 
     def generate_key(self):
-        regex = re.compile('')
-        key = binascii.hexlify(os.urandom(3)).decode()
-        # make sure that there is at least one non-digit in the key
-        while not re.search('\D', key, re.IGNORECASE):
-            key = binascii.hexlify(os.urandom(3)).decode()
-        return key.lower()
+        time_int = int(round(time() * 1000))
+        key = base_convert(time_int, 62)
+        return key
 
     def retrieve_website_title(self):
         try:
